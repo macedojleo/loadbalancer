@@ -40,16 +40,35 @@ Following the instructions [here](https://www.vagrantup.com/docs/installation/) 
 Run all following commands from **control** VM.
 
 1. Pre-install (**ALL MACHINES**)
-```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/pre-install.yml```
+
+ ```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/pre-install.yml```
+
 2. Load Balance (**LB01**)
-```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/nginx.yml```
+
+ ```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/nginx.yml```
+
 3. Apache services (**APP01, APP02**)
-```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/apache2.yml```
+
+ ```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/apache2.yml```
+
 4. Data Base (**DB01**)
-```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/mysql.yml```
+
+
+ ```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/mysql.yml```
 
 # Deploying simple static web page
 
 Run the following command from **control** VM.
 
  ```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/app.yml```
+
+# Testing load balancer is working property
+
+From web browser access: http://192.168.135.101/page.html
+
+![image](https://user-images.githubusercontent.com/32895268/111078454-6023b300-84ed-11eb-8dc8-ee8a1edbcff7.png)
+
+Reload the page and check if the HTTP traffic was redirected to another web server by NGINX.
+
+![image](https://user-images.githubusercontent.com/32895268/111078490-995c2300-84ed-11eb-8e31-b3ee184638f5.png)
+
