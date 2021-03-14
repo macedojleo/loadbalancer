@@ -1,0 +1,29 @@
+---
+- name: Deploy applications
+  hosts: APPS
+  become: true
+  vars_files:
+    - vars/apps.yml
+
+  tasks:
+  - name: copy project to workdir
+    copy:
+      src: "{{ projectdir }}"
+      dest: "{{ workdir }}"
+      owner: webadm
+      group: web
+      mode: u=rw,g=rw,o=r
+
+  - name: create detail page content
+    copy:
+      content: "Welcome to {{ ansible_fqdn }} on {{ ansible_enp0s8.ipv4.address }}"
+      dest: "{{ workdir }}/detail.html"
+      owner: webadm
+      group: web
+      mode: u=rw,g=rw,o=r
+
+  - name: Put IP and HOSTNAME into page.html file
+    lineinfile:
+      path: "{{ workdir }}/page.html"
+      line: "<p> IP Address: {{ ansible_enp0s8.ipv4.address }} | Hostname: {{ ansible_fqdn }} </p>"
+      insertbefore: "</body>"

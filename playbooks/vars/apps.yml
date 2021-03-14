@@ -1,0 +1,6 @@
+---
+projectdir: "/vagrant/project/"
+workdir: "/var/www/html"
+files:
+  - { name: app01, index_file: /indexA.html }
+  - { name: app02, index_file: /indexB.html }

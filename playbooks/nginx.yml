@@ -1,0 +1,40 @@
+---
+- name: Installing Load Balancer
+  hosts: LOADBALANCERS
+  become: true
+  vars_files:
+    - vars/loadbalance.yml
+  
+  tasks:
+  - name: Installing NGINX packages
+    apt:
+     name: nginx
+     state: latest
+
+  - name: ensure NGINX is running
+    service:
+      name: nginx 
+      state: started
+
+  - name: Allow all access to tcp ports
+    ufw:
+     rule: allow
+     port: '{{ item }}'
+     proto: tcp
+    loop: '{{ nginx_ports }}'
+
+  - name: Copy cfg file
+    copy:
+     src: '{{ nginx_path_cfg_file }}'
+     dest: /etc/nginx/sites-available/default
+     owner: root
+     group: root
+     mode: 0644
+     backup: yes
+    notify:
+    - Restart nginx
+  handlers:
+   - name: Restart nginx
+     service:
+      name: nginx
+      state: restarted

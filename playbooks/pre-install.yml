@@ -1,0 +1,27 @@
+---
+- name: Pre-requisites
+  hosts: ALL
+  become: true
+  vars_files:
+    - vars/hosts.yml
+
+  tasks:
+  - name: Update and upgrade apt packages
+    apt:
+     upgrade: yes
+     update_cache: yes
+  - name: Install python-apt 
+    apt:
+      name: python-apt
+      state: latest
+  - name: Install python-pip
+    apt:
+      name: python-pip
+      state: latest
+  - name: Add mappings to /etc/hosts
+    blockinfile:
+      path: /etc/hosts
+      block: |
+        {{ item.ip }} {{ item.name }}
+      marker: ""
+    loop: "{{ machines }}"

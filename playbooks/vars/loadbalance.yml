@@ -1,0 +1,6 @@
+---
+nginx_ports:
+ - 80
+ - 403
+
+nginx_path_cfg_file: "/vagrant/files/default"

@@ -1,0 +1,50 @@
+---
+- name: set up httpd webserver
+  hosts: APPS
+  become: true
+  vars_files:
+    - vars/apps.yml
+  
+  tasks:
+  - name: Install apache 
+    apt:
+      name: apache2
+      update_cache: yes
+      state: latest
+
+  - name: ensure apache2 is running
+    service:
+      name: apache2 
+      state: started
+
+  - name: Allow all access to tcp port 80
+    ufw:
+     rule: allow
+     port: 80
+     proto: tcp
+
+  - name: Restart ufw service to load in the firewall changes
+    service: 
+      name: ufw
+      state: restarted
+  
+  - name: create web admin group
+    group:
+      name: web
+      state: present
+
+  - name: create web admin user
+    user:
+      name: webadm
+      comment: "Web Admin"
+      groups: web
+      append: yes
+
+  - name: set content directory group/permissions 
+    file:
+      path: "{{ workdir }}
+      owner: root
+      group: web
+      state: directory
+      mode: u=rwx,g=rwx,o=rx,g+s
+

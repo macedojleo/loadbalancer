@@ -1,0 +1,12 @@
+upstream appservers {
+    server app01;      
+    server app02;
+}
+
+server {
+    # Location that proxies requests to the upstream group
+    location / {
+        proxy_pass http://appservers;
+        #health_check;
+    }
+}
