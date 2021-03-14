@@ -20,12 +20,19 @@ Following the instructions [here](https://www.vagrantup.com/docs/installation/) 
  ```$ vagrant ssh control```
  
  5. Since you've got access to **control** VM, validate Ansible has been installed successfully.
+
+
  ```vagrant@control:~$ ansible --version```
 
  6. You can have access from **control** VM to another machines by using ssh command.
+
+
  ```vagrant@control:~$ ssh lb01```
+ 
  ```vagrant@control:~$ ssh db01```
+ 
  ```vagrant@control:~$ ssh app01```
+ 
  ```vagrant@control:~$ ssh app02```
  
 # Setting up Virtual Machines 
