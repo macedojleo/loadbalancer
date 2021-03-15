@@ -25,19 +25,21 @@ Following the instructions [here](https://www.vagrantup.com/docs/installation/) 
 1. [Clone](https://github.com/macedojleo/loadbalancer.git) this project
 2. Access the project directory
 3. Using the system CLI, run the following Vagrant commands in order to create and provisioning the Virtual Machines.
- 
+
+3.1. Provisioning VM's:
+
  ```$ vagrant up --provisioning ```
 
- 3.1. Access the **control** VM (where Ansible was installed):
+3.2. Access the **control** VM (where Ansible was installed):
   
  ```$ vagrant ssh control```
  
- 3.2. Since you've got access to **control** VM, validate Ansible has been installed successfully.
+3.3. Since you've got access to **control** VM, validate Ansible has been installed successfully.
 
 
  ```vagrant@control:~$ ansible --version```
 
- 3.3. Now, from the **control** VM you can have access to another machines by using ssh command.
+3.4. Now, from the **control** VM you can have access to another machines by using ssh command.
 
 
  ```vagrant@control:~$ ssh lb01```
