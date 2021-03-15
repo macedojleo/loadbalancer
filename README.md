@@ -1,11 +1,24 @@
-# Installing Vagrant
+# Prerequisites
+## Installing Vagrant
 
 **Vagrant** is a tool for building and managing virtual machine environments in a single workflow. 
 Following the instructions [here](https://www.vagrantup.com/docs/installation/) in order to install it. 
 
-# VirtualBox Provider
+## VirtualBox Provider
 
 [Download](https://www.virtualbox.org/wiki/Downloads) and install Virtual Box as virtualization provider.
+
+# Topology
+
+![image](https://user-images.githubusercontent.com/32895268/111208566-d2b29280-85c2-11eb-9442-038602abaaf6.png)
+
+| Hostname      | Role          
+| :------------:|:------------------------:|
+| CONTROL       | Configuration management |
+| LB01          | Load Balancer            |
+| DB01          | Database                 |
+| APP01         | Webserver                |
+| APP02         | Webserver                |
 
 # Creating VM's
 
