@@ -8,6 +8,12 @@ Vagrant.configure(2) do |config|
   config.vm.define "control", primary: true do |h|
     h.vm.network "private_network", ip: "192.168.135.10"
     h.vm.hostname = "control"
+    
+    h.vm.provider "virtualbox" do |vb| 
+      vb.memory = 2048
+      vb.cpus = 2
+    end
+    
     h.vm.provision :shell, :inline => <<'EOF'
 if [ ! -f "/home/vagrant/.ssh/id_rsa" ]; then
   ssh-keygen -t rsa -N "" -f /home/vagrant/.ssh/id_rsa
@@ -43,6 +49,12 @@ EOF
     h.vm.network "private_network", ip: "192.168.135.101"
     h.vm.hostname = "lb01"
     h.vm.network "forwarded_port", guest: 80, host: 8080
+
+    h.vm.provider "virtualbox" do |vb| 
+      vb.memory = 1048
+      vb.cpus = 2
+    end
+
     h.vm.provision :shell, :inline => <<'EOF'
 cat /vagrant/control.pub >> /home/vagrant/.ssh/authorized_keys
 apt install python -y
@@ -52,6 +64,12 @@ EOF
   config.vm.define "app01" do |h|
     h.vm.network "private_network", ip: "192.168.135.111"
     h.vm.hostname = "app01"
+
+    h.vm.provider "virtualbox" do |vb| 
+      vb.memory = 1048
+      vb.cpus = 2
+    end
+
     h.vm.provision :shell, :inline => <<'EOF'
 cat /vagrant/control.pub >> /home/vagrant/.ssh/authorized_keys
 apt update -y
@@ -62,6 +80,12 @@ EOF
   config.vm.define "app02" do |h|
     h.vm.network "private_network", ip: "192.168.135.112"
     h.vm.hostname = "app02"
+
+    h.vm.provider "virtualbox" do |vb| 
+      vb.memory = 1048
+      vb.cpus = 2
+    end
+
     h.vm.provision :shell, :inline => <<'EOF'
 cat /vagrant/control.pub >> /home/vagrant/.ssh/authorized_keys
 apt update -y
@@ -72,6 +96,12 @@ EOF
   config.vm.define "db01" do |h|
     h.vm.network "private_network", ip: "192.168.135.121"
     h.vm.hostname = "db01"
+
+    h.vm.provider "virtualbox" do |vb| 
+      vb.memory = 1048
+      vb.cpus = 2
+    end
+
     h.vm.provision :shell, :inline => <<'EOF'
 cat /vagrant/control.pub >> /home/vagrant/.ssh/authorized_keys
 apt update -y
