@@ -37,7 +37,7 @@ Following the instructions [here](https://www.vagrantup.com/docs/installation/) 
  
 # Setting up Virtual Machines 
 
-Run all following commands from **control** VM.
+Run all following commands in **control** Machine.
 
 1. Pre-install (**ALL MACHINES**)
 
@@ -58,7 +58,7 @@ Run all following commands from **control** VM.
 
 # Deploying simple static web page
 
-Run the following command from **control** VM.
+Run the following command in **control** machine.
 
  ```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/app.yml```
 
