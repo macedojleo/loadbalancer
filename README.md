@@ -30,11 +30,11 @@ Following the instructions [here](https://www.vagrantup.com/docs/installation/) 
 
  ```$ vagrant up --provisioning ```
 
-3.2. Access the **control** VM (where Ansible was installed):
+3.2. Access the **control** VM (Machine where Ansible has installed previously):
   
  ```$ vagrant ssh control```
  
-3.3. Since you've got access to **control** VM, validate Ansible has been installed successfully.
+3.3. Since you've got access to **control** VM, validate if Ansible has been installed successfully.
 
 
  ```vagrant@control:~$ ansible --version```
@@ -58,15 +58,15 @@ Run all following commands in **control** Machine.
 
  ```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/pre-install.yml```
 
-2. Load Balance (**LB01**)
+2. Setting up Load Balance (**LB01**)
 
  ```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/nginx.yml```
 
-3. Apache services (**APP01, APP02**)
+3. Setting up web servers (**APP01, APP02**)
 
  ```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/apache2.yml```
 
-4. Data Base (**DB01**)
+4. Setting up Database (**DB01**)
 
 
  ```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/mysql.yml```
@@ -77,7 +77,7 @@ Run the following command in **control** machine.
 
  ```vagrant@control:~$ ansible-playbook -i /etc/ansible/inventories/hosts /etc/ansible/playbooks/app.yml```
 
-# Testing load balancer is working property
+# Testing HTTP load balancing
 
 From web browser access: http://192.168.135.101/page.html
 
